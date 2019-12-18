@@ -2,11 +2,12 @@ package net.fina.presentation.security.api;
 
 import net.fina.presentation.security.entity.Role;
 import net.fina.presentation.security.entity.User;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface UserService extends UserDetailsService {
+public interface UserService{
     Flux<User> load();
     Mono<User> getUserById(String id);
     Mono<User> getUserByUsername(String username);

@@ -18,8 +18,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+/*
     @Autowired
     private PasswordEncoder passwordEncoder;
+*/
 
     @Override
     public Flux<User> load() {
@@ -38,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Mono<User> addUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
         return userRepository.save(user);
     }
@@ -54,7 +56,7 @@ public class UserServiceImpl implements UserService {
         if(user.getPassword() == null || "".equals(user.getPassword())){
             user.setPassword(oldUser.getPassword());
         } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
 
         user.setRoles(oldUser.getRoles());
@@ -77,9 +79,9 @@ public class UserServiceImpl implements UserService {
     public Flux<Role> loadRoles() {
         return Flux.fromArray(Role.values());
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findByUsername(s).block();
-    }
+//TODO ReactiveUserDetailService
+/*    @Override
+    public Mono<UserDetails> findByUsername(String s) {
+        return userRepository.findByUsername(s).map(user -> (UserDetails)user);
+    }*/
 }
