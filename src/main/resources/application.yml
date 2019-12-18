@@ -1,0 +1,9 @@
+server:
+  port: 1222
+spring:
+  data:
+    mongodb:
+      port: 27017
+      host: localhost
+      database: presentation_db
+      authentication-database: admin
