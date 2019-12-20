@@ -1,5 +1,6 @@
 package net.fina.presentation.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Document
@@ -17,18 +20,22 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User implements UserDetails {
+public class User {
 
     @Id
     private String id;
     private String username;
+    @JsonIgnore
     private String password;
     private String mail;
-    private boolean active;
 
-    private Set<Role> roles;
+    @Builder.Default()
+    private boolean active = true;
 
-    @Override
+    @Builder.Default()
+    private List<String> roles = new ArrayList<>();
+
+  /*  @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
@@ -61,7 +68,7 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isActive();
-    }
+    }*/
 
 
 }

@@ -33,7 +33,7 @@ public class PresentationThemeServiceImpl implements PresentationThemeService {
     @Override
     public Mono<PresentationTheme> save(PresentationTheme presentationTheme, Principal principal) {
 
-        userService.getUserByUsername(principal.getName()).subscribe((presentationTheme::setCreator));
+        //userService.getUserByUsername(principal.getName()).subscribe((presentationTheme::setCreator));
 
         return repository.save(presentationTheme);
     }
